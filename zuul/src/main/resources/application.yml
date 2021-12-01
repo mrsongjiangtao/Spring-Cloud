@@ -1,0 +1,32 @@
+server:
+  port: 8084
+spring:
+  application:
+    name: spring-cloud-zuul
+  sleuth:
+    sampler:
+      probability: 1.0
+  zipkin:
+    base-url: http://127.0.0.1:9411/zipkin/
+#zuul:
+#  routes:
+#    baidu:
+#      path: /baidu/**
+#      url: https://www.baidu.com/
+#close service to path mapping,default mapping is serviceId
+#serviceId is register to eureka service name in producer yml file
+#http://localhost:8084/sjt-test-producer/hello?name=123  result is:come from the sjt-test-producer 'hello' to 123
+#zuul:
+#  routes:
+#    api-producer:
+#      path: /asdfasaasdfasdfffa/**
+#      serviceId: SJT-TEST-PRODUCER
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+zuul:
+  FormBodyWrapperFilter:
+    pre:
+      disable: true
+

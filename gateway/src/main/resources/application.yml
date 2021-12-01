@@ -1,0 +1,62 @@
+server:
+  port: 8086
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+logging:
+  level:
+    org.springframework.cloud.gateway: debug
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+    #discovery:locator:enabled 代表开启与服务注册于发现组件进行结合
+    #通过 serviceId 转发到具体的服务实例。默认为 false，设为 true 便开启通过服务中心的自动根据 serviceId 创建路由的功能。
+      discovery:
+        locator:
+          enabled: true
+          #serviceID 小写访问开启，默认得大写访问
+          lowerCaseServiceId: true
+#      routes:
+#        - id: add_request_parameter_route
+#          uri: http://localhost:8086
+#          filters:
+#          #默认为 producer的foo服务的参数foo赋值为bar
+#            - AddRequestParameter=foo, bar
+#          predicates:
+#            - Method=GET
+      # 自定义路由
+                #        routes:
+                #          - id: gateway-service
+                #          uri: https://www.baidu.com
+                #          order: 0
+                #          predicates:
+                #           - Path=/sjt/{segment}, /sjt2/{segment}
+#      routes:
+      # 配置多条
+#        - id: gateway-service-sjt
+#          uri: https://blog.csdn.net/Song_JiangTao
+#          order: 0
+#          predicates:
+#            - Cookie=sessionId, sjt
+#        - id: gateway-service
+#          uri: https://www.baidu.com
+#          order: 0
+#          predicates:
+#在配置时间之前访问，之后访问，区间访问 http://localhost:8086/ 满足则跳百度，否则404
+#            - Before=2019-01-01T00:00:00+08:00[Asia/Shanghai]
+#            - After=2019-01-01T00:00:00+08:00[Asia/Shanghai]
+#            - Between=2019-01-01T00:00:00+08:00[Asia/Shanghai], 2030-07-01T00:00:00+08:00[Asia/Shanghai]
+
+#cookie和header匹配路径，格式：key,value;value可以是关键字
+#              - Cookie=sessionId, test
+#              - Header=h, \d+
+#请求方法
+#              - Method=GET
+#              - Path=/sjt/{segment}, /sjt2/{segment}
+#              - RemoteAddr=192.168.1.1/24
+#              - Query=smile
+
+#上述匹配均可随意组合使用
